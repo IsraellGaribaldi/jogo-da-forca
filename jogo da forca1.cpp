@@ -1,12 +1,12 @@
-// Documentar o cÛdigo (boas pr·ticas)
+// Documentar o c√≥digo (boas pr√°ticas)
 #include <stdio.h>
 #include <string.h>
 
-// Modificar o cÛdigo de acordo com as pendencias abaixo:
+// Modificar o c√≥digo de acordo com as pendencias abaixo:
 
-// Utilize array com alocaÁ„o din‚mica baseado na palavra da vez
-// Utilize struct para armazenar em memÛria e depois transferir para arquivo
-// Controle de jogada deve ser feito utilizando entrada de dados pelo teclado contendo informaÁ„o da posiÁ„o e usu·rio
+// Utilize array com aloca√ß√£o din√¢mica baseado na palavra da vez
+// Utilize struct para armazenar em mem√≥ria e depois transferir para arquivo
+// Controle de jogada deve ser feito utilizando entrada de dados pelo teclado contendo informa√ß√£o da posi√ß√£o e usu√°rio
 
 char palavrasecreta[20];
 char chutes[26];
@@ -16,6 +16,8 @@ abertura() {
     printf("//\n");
     printf("/ Jogo de Forca */\n");
     printf("//\n\n");
+    printf("digite a palavra a ser descoberta: ")
+    scanf("%s", &palavrasecreta);
 }
 
 chuta() {
@@ -40,7 +42,7 @@ int chutou(char letra) {
 
 desenhaforca() {
 
-    printf("VocÍ j· deu %d chutes\n", tentativas);
+    printf("Voc√™ j√° deu %d chutes\n", tentativas);
 
     for(int i = 0; i < strlen(palavrasecreta); i++) {
 
@@ -56,7 +58,7 @@ desenhaforca() {
 }
 
 escolhepalavra() {
-    sprintf(palavrasecreta, "MELANCIA"); // Mudar esse trecho de cÛdigo (Utilize array com alocaÁ„o din‚mica baseado na palavra da vez)
+    sprintf(palavrasecreta, "MELANCIA"); // Mudar esse trecho de c√≥digo (Utilize array com aloca√ß√£o din√¢mica baseado na palavra da vez)
 }
 
 int main() {
@@ -76,14 +78,14 @@ int main() {
 
     } while (!acertou && !enforcou);
 }
-// 1∫) Na funÁ„o abertura (), ser· exibido a mensagem de abertura contida na funÁ„o;
+// 1¬∫) Na fun√ß√£o abertura (), ser√° exibido a mensagem de abertura contida na fun√ß√£o;
 
-// 2∫) A funÁ„o escolhepalavra (), atribuir· a string "MELANCIA" a vari·vel palavrasecreta, que agora "vale" MELANCIA;
+// 2¬∫) A fun√ß√£o escolhepalavra (), atribuir√° a string "MELANCIA" a vari√°vel palavrasecreta, que agora "vale" MELANCIA;
 
-// 3∫) No loop do...while, ser· invocada a funÁ„o desenhaforca(). Essa funÁ„o faz o seguinte: primeiro ela printa a quantidade de tentativas que o usu·rio j· efetuou. Depois, ela invoca a funÁ„o jachutou() passando como par‚metro para ela a vari·vel palavrasecreta na posiÁ„o do indexador i, ficando jachutou(palavrasecreta[i]). A funÁ„o strlen varre a string e retorna a quantidade de posiÁıes que ela possui, ent„o no caso a palavra MELANCIA, retornar· o valor 8. Como o usu·rio ainda n„o chutou nenhuma letra, a funÁ„o cair· na condicional "else", imprimindo os 8 underscores (_ ).
+// 3¬∫) No loop do...while, ser√° invocada a fun√ß√£o desenhaforca(). Essa fun√ß√£o faz o seguinte: primeiro ela printa a quantidade de tentativas que o usu√°rio j√° efetuou. Depois, ela invoca a fun√ß√£o jachutou() passando como par√¢metro para ela a vari√°vel palavrasecreta na posi√ß√£o do indexador i, ficando jachutou(palavrasecreta[i]). A fun√ß√£o strlen varre a string e retorna a quantidade de posi√ß√µes que ela possui, ent√£o no caso a palavra MELANCIA, retornar√° o valor 8. Como o usu√°rio ainda n√£o chutou nenhuma letra, a fun√ß√£o cair√° na condicional "else", imprimindo os 8 underscores (_ ).
 
-// 4∫) Agora ser· invocada a funÁ„o chuta(), onde o usu·rio ir· informar a letra que ele deseja chutar. Essa letra, ser· salva na vari·vel chutes, que È um vetor de 26 posiÁıes, contemplando assim, todas as letras do alfabeto.
+// 4¬∫) Agora ser√° invocada a fun√ß√£o chuta(), onde o usu√°rio ir√° informar a letra que ele deseja chutar. Essa letra, ser√° salva na vari√°vel chutes, que √© um vetor de 26 posi√ß√µes, contemplando assim, todas as letras do alfabeto.
 
-// 5∫) Como as condiÁıes do while n„o foram satisfeitas, o loop se reinicia. Quando a funÁ„o desenhaforca() for invocada novamente, automaticamente a funÁ„o jachutou(palavrasecreta[i]) tambÈm ser·. Agora, como o usu·rio j· informou uma letra, a funÁ„o jachutou() pegar· essa letra e ir· comparar com todas as posiÁıes da palavrasecreta. Caso a letra seja encontrada, a funÁ„o retornar· o valor 1, ou seja, verdadeiro e a funÁ„o desenhaforca() executar· a condicional if, imprimindo a letra no lugar do underscore, caso contr·rio, o underscore ser· impresso novamente. O loop se repete sempre que o usu·rio informar uma nova letra.
+// 5¬∫) Como as condi√ß√µes do while n√£o foram satisfeitas, o loop se reinicia. Quando a fun√ß√£o desenhaforca() for invocada novamente, automaticamente a fun√ß√£o jachutou(palavrasecreta[i]) tamb√©m ser√°. Agora, como o usu√°rio j√° informou uma letra, a fun√ß√£o jachutou() pegar√° essa letra e ir√° comparar com todas as posi√ß√µes da palavrasecreta. Caso a letra seja encontrada, a fun√ß√£o retornar√° o valor 1, ou seja, verdadeiro e a fun√ß√£o desenhaforca() executar√° a condicional if, imprimindo a letra no lugar do underscore, caso contr√°rio, o underscore ser√° impresso novamente. O loop se repete sempre que o usu√°rio informar uma nova letra.
 
-// A ˙nica coisa que reparei, È que seu algoritmo est· num loop infinito no do...while, pois a negaÁ„o das vari·veis enforcou e acertou est„o sempre retornando um valor†verdadeiro.
+// A √∫nica coisa que reparei, √© que seu algoritmo est√° num loop infinito no do...while, pois a nega√ß√£o das vari√°veis enforcou e acertou est√£o sempre retornando um valor¬†verdadeiro.
