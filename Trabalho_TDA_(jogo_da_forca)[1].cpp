@@ -159,10 +159,10 @@ bool palavra_completa(){
     return true; // todas as letras já foram reveladas
 }
 
-// função principal
-int main(){
-
-    int ind_palavra = sorteia(); //sortea uma palavra do banco
+void jogar(){
+	int cont_erros=0; //quantidade de erros
+	
+	int ind_palavra = sorteia(); //sortea uma palavra do banco
 
     copia(ind_palavra); // copia a palavra para palavra_sort
 
@@ -172,60 +172,93 @@ int main(){
 
     int cont_let_dig=0; // contador de letras digitadas
 
-    int cont_erros=0; // contador de erros
-
     char letras_digitadas[26]; // vetor contendo letras digitadas
 
     char letra; // letra digitada
+    
+	    while(cont_erros<6){
+	        system("cls"); // comando do sistema para limpar a tela
+	        cout << "Dica: " << dicas[ind_palavra] << endl; // exibe a dica sempre antes da forca
+	        imprime_forca(cont_erros); // imprime a forca
+	        imprime_palavra_dig(); // apresenta o progresso da palavra
+	        imprime_let_dig(letras_digitadas,cont_let_dig); // mostra letras utilizadas
+	        
+			// bloco de tentativas restantes
+			cout<<"\n\n Tentativas restantes: "<<6-cont_erros<<"\n\n";
+	        cout<<"\n\n";
+	        cout<<"Digite uma letra: ";
+	        cin>>letra;
+	        letra = tolower(letra); // função para converter a letra para minúscula
+	        
+			// bloco para verificar se a letra ja foi digitada na palavra ou não
+			if(verifica_letra(letra,letras_digitadas)){
+	            cout<<"Letra ja foi digitada! Tente novamente!\n\n";
+	            system("pause");
+	        }else{
+	            letras_digitadas[cont_let_dig] = letra;
+	            cont_let_dig++;
+				
+				// bloco incluso para verificar se a letra deverá ser revelada ou não 
+	            if(verifica_letra(letra,palavra_sort)){
+	                substitui(letra); // revela a letra
+	            }else{
+	                cout<<"\nLetra incorreta! Tente novamente\n\n";
+	                cont_erros++; // adiciona erro
+	                system("pause");
+	
+	            }
+	        }
+	        
+	        // bloco para decidir o final do jogo (se o usuário errou em adivinhar a palavra nas tentativas, imprime que as tentativas acabaram)
+	        if(cont_erros>=6){
+	            system("cls");
+	            cout<<"\n\n\tSuas tentativas acabaram!\n Reinicie o software para tentar novamente!\n";
+	            system("pause");
+	            return;
+	        }
+	        
+	        // bloco para decidir o final do jogo (se o usuário acertou em adivinhar a palavra nas tentativas, imprime que o usuário acertou a palavra)
+	        if(palavra_completa()){
+	            cout<<"\n\tPARABENS!!!\n Voce acertou a palavra!\n\n";
+	            system("pause");
+	            return;
+	        }
+	    }
+	}
 
-    while(cont_erros<6){
-        system("cls"); // comando do sistema para limpar a tela
-        cout << "Dica: " << dicas[ind_palavra] << endl; // exibe a dica sempre antes da forca
-        imprime_forca(cont_erros); // imprime a forca
-        imprime_palavra_dig(); // apresenta o progresso da palavra
-        imprime_let_dig(letras_digitadas,cont_let_dig); // mostra letras utilizadas
-        
-		// bloco de tentativas restantes
-		cout<<"\n\n Tentativas restantes: "<<6-cont_erros<<"\n\n";
-        cout<<"\n\n";
-        cout<<"Digite uma letra: ";
-        cin>>letra;
-        letra = tolower(letra); // função para converter a letra para minúscula
-        
-		// bloco para verificar se a letra ja foi digitada na palavra ou não
-		if(verifica_letra(letra,letras_digitadas)){
-            cout<<"Letra ja foi digitada! Tente novamente!\n\n";
-            system("pause");
-        }else{
-            letras_digitadas[cont_let_dig] = letra;
-            cont_let_dig++;
+void menu(int escolha){	
+	do {
+		printf("Menu\n1- Jogar\n2- Creditos\n3- Sair\n");
+		scanf("%i", &escolha);
+		
+		switch(escolha) {
+			case 1:
+				system("cls");
+				printf("Iniciando jogo...\n");
+				jogar();
+			break;
 			
-			// bloco incluso para verificar se a letra deverá ser revelada ou não 
-            if(verifica_letra(letra,palavra_sort)){
-                substitui(letra); // revela a letra
-            }else{
-                cout<<"\nLetra incorreta! Tente novamente\n\n";
-                cont_erros++; // adiciona erro
-                system("pause");
+			case 2:
+				system("cls");
+				printf("\nCreditos\n\nAna Beatriz Silva - 38640805\nAna Beatriz Costa - 38488612\nAna Luiza Brandao - 39233545\nIsraell Garibaldi - 38968169\n\n");
+			break;
+			
+			case 3:
+				exit(0);
+			break;
+			
+			default:
+				printf("Escolha uma opção válida");
+			break;
+		}
+	} while (escolha != 3);
+}
 
-            }
-        }
-        
-        // bloco para decidir o final do jogo (se o usuário errou em adivinhar a palavra nas tentativas, imprime que as tentativas acabaram)
-        if(cont_erros>=6){
-            system("cls");
-            cout<<"\n\n\tSuas tentativas acabaram!\n Reinicie o software para tentar novamente!\n";
-            system("pause");
-            return 0;
-        }
-        
-        // bloco para decidir o final do jogo (se o usuário acertou em adivinhar a palavra nas tentativas, imprime que o usuário acertou a palavra)
-        if(palavra_completa()){
-            cout<<"\n\tPARABENS!!!\n Voce acertou a palavra!\n\n";
-            system("pause");
-            return 0;
-        }
-    }
+// função principal
+int main(){
+    int escolha;
+    
+	menu(escolha);
 
     return 0;
 }
